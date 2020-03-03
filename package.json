@@ -1,0 +1,85 @@
+{
+  "name": "qiankun-demo",
+  "version": "1.4.1",
+  "description": "Qiankun sample Micro Frontend app",
+  "keywords": [
+    "micro frontend",
+    "microfrontend",
+    "micro frontends",
+    "micro-frontend",
+    "micro-frontends",
+    "microservice"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "packages:install": "npm-run-all --serial build install:*",
+    "packages:start": "npm-run-all --parallel start:*",
+    "install:main": "cd packages/main && yarn",
+    "start:main": "cd packages/main && yarn start",
+    "install:react16": "cd packages/react16 && yarn",
+    "start:react16": "cd packages/react16 && yarn start",
+    "install:vue": "cd packages/vue && yarn",
+    "start:vue": "cd packages/vue && yarn start",
+    "build": "father-build",
+    "prepublishOnly": "yarn lint && yarn build",
+    "lint": "yarn lint:js && yarn lint:prettier",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:fix": "yarn lint:js -- --fix",
+    "lint:prettier": "check-prettier lint",
+    "prettier": "prettier -c --write **/*",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristianmandrup/qiankun-demo.git"
+  },
+  "author": "Kristian Mandrup",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kristianmandrup/qiankun-demo/issues"
+  },
+  "homepage": "https://github.com/kristianmandrup/qiankun-demo#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "import-html-entry": "^1.4.1",
+    "lodash": "^4.17.11",
+    "single-spa": "^4.4.3",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.129",
+    "@types/vfile-message": "1.x",
+    "@umijs/fabric": "^1.1.10",
+    "@vuepress/plugin-google-analytics": "^1.2.0",
+    "@vuepress/plugin-pwa": "^1.2.0",
+    "babel-plugin-import": "^1.12.1",
+    "check-prettier": "^1.0.3",
+    "concurrently": "^4.1.2",
+    "father-build": "^1.7.0",
+    "husky": "^2.3.0",
+    "lint-staged": "^9.4.2",
+    "np": "^5.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.4.5",
+    "vuepress": "^1.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,ts,json,css,md}": [
+      "yarn prettier",
+      "git add"
+    ],
+    "**/*.{js,ts}": [
+      "yarn lint:fix",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+/test/fixtures
+**/*.gif
+/dist
+/docs
