@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start } from 'qiankun';
 import Framework from './Framework';
+import './register' // register apps
 
 /**
  * react render
@@ -12,68 +13,22 @@ function render({ appContent, loading }) {
   ReactDOM.render(<Framework content={appContent} loading={loading} />, container);
 }
 
-function genActiveRule(routerPrefix) {
-  return location => location.pathname.startsWith(routerPrefix);
-}
-
 /**
- * Step1 初始化应用（可选）
+ * Step1
  */
 render({ appContent: '', loading: true });
 
 /**
- * Step2 注册子应用
+ * Step2: register apps
  */
-registerMicroApps(
-  [
-    {
-      name: 'react16',
-      entry: '//localhost:7100',
-      render,
-      activeRule: genActiveRule('/react16'),
-    },
-    {
-      name: 'react15',
-      entry: '//localhost:7102',
-      render,
-      activeRule: genActiveRule('/react15'),
-    },
-    {
-      name: 'angular9',
-      entry: '//localhost:7103',
-      render,
-      activeRule: genActiveRule('/angular9'),
-    },
-  ],
-  {
-    // @ts-ignore
-    beforeLoad: [
-      app => {
-        console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
-      },
-    ],
-    // @ts-ignore
-    beforeMount: [
-      app => {
-        console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
-      },
-    ],
-    // @ts-ignore
-    afterUnmount: [
-      app => {
-        console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
-      },
-    ],
-  },
-);
 
 /**
- * Step3 设置默认进入的子应用
+ * Step3: Default app
  */
 setDefaultMountApp('/react16');
 
 /**
- * Step4 启动应用
+ * Step4 
  */
 start({
   prefetch: true,
@@ -82,16 +37,4 @@ start({
   fetch: window.fetch,
 });
 
-runAfterFirstMounted(() => {
-  console.log('[MainApp] first app mounted');
 
-  // Incremental register the new app
-  registerMicroApps([
-    {
-      name: 'vue',
-      entry: '//localhost:7101',
-      render,
-      activeRule: genActiveRule('/vue'),
-    },
-  ]);
-});
