@@ -6,6 +6,12 @@ Qiankun based Micro Frontend app
 
 [qiankun](https://qiankun.umijs.org/)
 
+## Infrastructure
+
+- [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces)
+- [Lerna](https://lerna.js.org/)
+- [Nx](https://nx.dev/) TODO
+
 ## 💿 Getting started
 
 The `packages` folder contains 
