@@ -7,6 +7,7 @@ import Framework from './Framework';
  * react render
  */
 function render({ appContent, loading }) {
+  // @ts-ignore
   const container = document.getElementById('container');
   ReactDOM.render(<Framework content={appContent} loading={loading} />, container);
 }
@@ -45,16 +46,19 @@ registerMicroApps(
     },
   ],
   {
+    // @ts-ignore
     beforeLoad: [
       app => {
         console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
       },
     ],
+    // @ts-ignore
     beforeMount: [
       app => {
         console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
       },
     ],
+    // @ts-ignore
     afterUnmount: [
       app => {
         console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
